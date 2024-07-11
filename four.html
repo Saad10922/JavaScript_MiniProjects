@@ -1,0 +1,72 @@
+<!-- Number Guessing Game -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="output.css">
+    <title>Guess A Number</title>
+</head>
+<body class="bg-[url('Game_Background.jpg')] bg-center bg-cover h-screen w-screen">
+    <div class="bg-[rgba(0,0,0,0.5)] w-full h-full sm:px-[20%] pt-[5%]">
+        <h1 class="text-white text-4xl sm:text-5xl font-bold text-center mb-[5%]">Guess A Number</h1>
+        <div id="main" class="bg-[rgba(0,0,0,0.7)] h-[70%] w-[90%] text-white grid justify-center items-center  mx-auto rounded">
+            <h2 class="text-center text-[20px]">> Guess A Number B/w 1 to 100</h2>
+            <hr>
+            <p class="text-center text-[20px]">> You have Total 10 Attempts to Guess that Number</p>
+            <hr>
+            <form id="myform" action="submit" class="flex flex-col items-center ">
+                
+                <input type="text" name="number" id="number" class="bg-slate-800 h-9 text-white text-center rounded mb-[5%]" placeholder="Enter Your Guess" required><br><br>
+
+                
+                <button class="relative flex items-center justify-center p-0.5 mb-2 text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+                    <span type="submit" class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                        Submit Guess
+                    </span>
+                </button>
+            </form>
+            <p id="rAttempts" class="ml-8 text-[18px]">Remaining Attempts : </p>
+            <p id="myarray" class="ml-8 text-[15px">Attempts:</p>
+        </div>
+    </div>
+    <script>
+        const toGuess = Math.floor(((Math.random() * 100) + 1));
+        let rAttempts = document.querySelector('#rAttempts');
+        let attempts = document.querySelector("#myarray");
+        let section = document.querySelector('#main');
+        let state = document.createElement('p');
+        state.className="ml-8 text-[18px]"
+        section.appendChild(state);
+        console.log((toGuess));
+        let remainingAttempts = 10;
+        let userAttempts = [];
+        const form = document.querySelector('#myform');
+        rAttempts.innerHTML = rAttempts.innerHTML + remainingAttempts;
+
+        form.addEventListener('submit', (i) => {
+            i.preventDefault();
+            if (remainingAttempts > 0)
+                remainingAttempts = remainingAttempts - 1;
+            const userGuess = document.querySelector('#number');
+            const userGuessVal = userGuess.value;
+            userAttempts.push(userGuessVal);
+            rAttempts.innerHTML = "Remaining Attempts : " + remainingAttempts;
+            attempts.innerHTML = "Attempts : " + userAttempts;
+            compare(userGuessVal);
+            userGuess.value = '';
+        });
+
+        function compare(value) {
+            if (value == toGuess) {
+                state.innerHTML = "You Won!!";
+                form.style.display = 'none';
+            } else if (value < toGuess) {
+                state.innerHTML = "Too Low";
+            } else if (value > toGuess) {
+                state.innerHTML = "Too High";
+            }
+        }
+    </script>
+</body>
+</html>

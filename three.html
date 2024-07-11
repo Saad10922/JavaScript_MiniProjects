@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="output.css">
+    <title>Digital Clock</title>
+</head>
+<body class="h-screen bg-[url('time_Background.jpg')] bg-center bg-cover w-screen">
+    <div class="h-screen text-white w-screen bg-[rgba(0,0,0,0.8)] flex items-center justify-center">
+        <div class="text-center">
+            <h1 class=" text-4xl font-bold  mb-8 py-2 px-4 bg-[rgba(0,0,0,0.5)]">Digital Clock</h1>
+            <!-- <div class=" clock h-auto w-auto text-3xl px-1 text-white shadow-2xl bg-[rgba(0,0,0,0.6)]"></div> -->
+            <div class="clock text-white text-3xl font-bold shadow-2xl py-2 px-4 border-b-4 bg-[rgba(0,0,0,0.5)] border-gray-700 rounded"></div>
+        </div>
+    </div>
+
+    <script>
+        const clock = document.querySelector('.clock');
+        setInterval(function(){
+            const date = new Date();
+            clock.innerHTML= date.toLocaleTimeString();
+        }, 1000);
+    </script>
+</body>
+</html>

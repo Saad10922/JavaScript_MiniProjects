@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="output.css">
+</head>
+<body class="bg-[url('BMI_back.jpg')] bg-cover bg-center text-white">
+    <div class="h-screen w-screen grid justify-center grid-flow-row -space-y-36 bg-[rgba(0,0,0,0.6)]">
+        <h1 class="text-4xl font-bold mt-16">BMI Calculator</h1>
+    
+        <div class="grid grid-flow-row justify-center  w-auto h-auto p-4">
+            <form method="post" class="grid justify-center">
+                <h3 class="text-2xl">Height (cm)</h3>
+                <input type="text" id="height" class="text-black text-center mb-2 rounded-md" placeholder="Height in cm">
+                <h3 class="text-2xl">Weight (kg)</h3>
+                <input type="text" id="weight" class="text-black text-center mb-2 rounded-md"  placeholder="Weight in cm"><br>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2">Calculate</button><br>
+                <h3 class="text-2xl">BMI</h3>
+                <input type="text" id="result" class="bg-white text-center text-black mb-4 rounded-md" disabled>
+            </form>
+            
+            <div class="flex justify-center">
+                <button type="button" class="button1 h-10 w-20 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 md:font-bold font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Reset</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let mybut = document.querySelector('form');
+    let resetBut = document.querySelector('.button1');
+    mybut.addEventListener('submit', (i) => {
+        i.preventDefault();
+        let height = parseInt(document.getElementById('height').value);
+        let weight = parseInt(document.getElementById('weight').value);
+        let result = document.getElementById('result');
+        if (height <= 0 || isNaN(height)) {
+            result.value = 'Invalid Input';
+            return;
+        }
+        if (weight <= 0 || isNaN(weight)) {
+            result.value = 'Invalid Input';
+            return;
+        } else {
+            const r = (weight / ((height * height) / 10000)).toFixed(2);
+            result.value = r;
+        }
+    });
+
+    resetBut.addEventListener('click', function () {
+        console.log("Control is in Click Event");
+        mybut.reset();
+        document.getElementById('result').value = '';
+    });
+</script>
+</html>
