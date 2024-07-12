@@ -46,26 +46,52 @@
 
         form.addEventListener('submit', (i) => {
             i.preventDefault();
-            if (remainingAttempts > 0)
-                remainingAttempts = remainingAttempts - 1;
             const userGuess = document.querySelector('#number');
             const userGuessVal = userGuess.value;
+            if (remainingAttempts > 0 && !(isNaN(userGuessVal)) && userGuessVal>0 && userGuessVal<101)
+             {   remainingAttempts = remainingAttempts - 1;
+           
             userAttempts.push(userGuessVal);
             rAttempts.innerHTML = "Remaining Attempts : " + remainingAttempts;
             attempts.innerHTML = "Attempts : " + userAttempts;
             compare(userGuessVal);
             userGuess.value = '';
+             }
+             else if(userGuessVal>0 || userGuessVal<101)
+             {
+                 state.innerHTML="Number Should be B/W [1-100]"
+             }
+             else if(isNaN(userGuessVal))
+             {
+                state.innerHTML="Please Enter a Number";
+             }
+             else
+             {
+                state.innerHTML="Game Over!!!"
+                form.style.display = 'none';
+
+             }
+
+
         });
 
         function compare(value) {
             if (value == toGuess) {
                 state.innerHTML = "You Won!!";
                 form.style.display = 'none';
-            } else if (value < toGuess) {
+            }
+            // else if (isNaN(value)) {
+            //     state.innerHTML = "Please enter a number";
+
+            //     }
+             else if (value < toGuess) {
                 state.innerHTML = "Too Low";
             } else if (value > toGuess) {
                 state.innerHTML = "Too High";
             }
+            //checking condition for value not albhabets
+            
+                
         }
     </script>
 </body>
